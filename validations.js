@@ -7,18 +7,7 @@ export const loginValidator = [
 export const registerValidator = [
     body('email', 'Неверный формат почты').isEmail(),    
     body('password', 'Пароль должен содержать не менее 5 символов').isLength({min: 5}),    
-    body('fullname', 'Укажите имя').isLength({min: 3}),
-    body('avatarUrl', 'Неверная ссылка на аватарку').optional().isURL()
-]
-export const postCreatValidator = [
-    body('title', 'Введите заголовок статьи').isLength({min: 3}).isString(),
-    body('text', 'Введите текст статьи').isLength({min: 3}).isString(),
-    body('tags', 'Неверный формат тагов').optional().isString(),
-    body('imageUrl', 'Неверная ссылка на изображение').optional().isString()
-]
-
-export const commentValidator = [
-    body('fullname', 'Введите имя').isLength({min: 3}).isString(),
-    body('text', 'Введите текст статьи').isLength({min: 3}).isString(),
-    body('imageUrl', 'Неверная ссылка на изображение').optional().isString()
+    body('name', 'Укажите имя').isLength({min: 3}),
+    body('surname', 'Укажите фамилию').isLength({min: 3}),
+    body('phone', 'Неверный формат номера телефона').isMobilePhone()
 ]
