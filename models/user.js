@@ -1,5 +1,33 @@
 import {Schema, model} from 'mongoose'
 
+// Корзина товаров
+const CartSchema = new Schema({
+    // ID продукта
+    product:{
+        type: Schema.Types.ObjectId,
+        ref:'Products',
+        required: true,
+    },
+    // Цена продукта
+    price:{
+        type: Schema.Types.ObjectId,
+        ref:'Products',
+        required: true,
+    },
+    // Количество
+    quantity:{
+        type: Number,
+        required: true,
+    },
+    // ИТОГО
+    total_price: {
+        type: Number,
+        required: true,
+        default: 0
+    }
+})
+
+// Пользователь
 const UserSchema = new Schema({
     // Имя
     name: {
@@ -44,6 +72,8 @@ const UserSchema = new Schema({
     },
     // Аватар
     avatarUrl: String,
+
+    cart: CartSchema,
 }, {
     timestamps: true
 })
