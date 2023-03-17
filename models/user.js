@@ -1,5 +1,6 @@
 import {Schema, model} from 'mongoose'
 
+
 const UserSchema = new Schema({
     // Имя
     name: {
@@ -44,6 +45,10 @@ const UserSchema = new Schema({
     },
     // Аватар
     avatarUrl: String,
+    favourites: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Products'
+    }]
 }, {
     timestamps: true
 })

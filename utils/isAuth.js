@@ -6,7 +6,7 @@ export default  (req, res, next) => {
     if(token) {
         try{
             const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET)
-            req.userId = decoded._id;
+            req.user = decoded;
             next()
         } catch (error) {
             return res.status(403).json({
@@ -15,7 +15,7 @@ export default  (req, res, next) => {
             })
         }
     } else {
-        return res.status(404).json({
+        return res.status(403).json({
             message: "Нет доступа"
         })
     }
