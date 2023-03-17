@@ -104,7 +104,7 @@ export const refresh = async (req, res) => {
 
 // Skwize: add User edit functions
 export const edit = async (req, res) => {
-    const {name, surname, email, phone, password, avatarUrl} = req.body
+    const {name, surname, email, phone, avatarUrl} = req.body
     const user = await UserModel.findById(req.userId)
 
     if (!user) return res.json({message: 'Пользователь не найден'})

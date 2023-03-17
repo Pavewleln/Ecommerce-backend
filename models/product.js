@@ -1,9 +1,8 @@
 import {Schema, model} from 'mongoose'
 
-// const 
 
 const ProductSchema = new Schema({
-    name: {
+    title: {
         type: String,
         required: true
     },
@@ -16,7 +15,11 @@ const ProductSchema = new Schema({
     },
     photos: [{
         type: String
-    }]
+    }],
+    type: {
+        type: String,
+        required: true
+    }
 
 })
 

@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser'
 // Routes import
 import AuthRoute from './routes/auth.js'
 import ProductRoute from './routes/product.js'
+import UserRoute from './routes/user.js'
 
 
 const app = express()
@@ -32,7 +33,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 app.use('/auth', AuthRoute)
-app.use('/product', ProductRoute)
+app.use('/users', UserRoute)
+app.use('/products', ProductRoute)
 
 
 app.post('/upload', isAuth, upload.single('image'), (req, res) => {

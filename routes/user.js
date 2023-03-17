@@ -5,7 +5,7 @@ import isAuth from '../utils/isAuth'
 const router = express.Router()
 
 
-router.patch('/edit', isAuth, edit)
+router.patch('/:userId?/edit', isAuth, edit)
 
 
 export default router
