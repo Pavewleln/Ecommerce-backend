@@ -10,7 +10,7 @@ export const getAll = async (req, res, next) => {
     }
 }
 
-export const newProduct = async (req, res, next) => {
+export const createProduct = async (req, res, next) => {
     try {
         if(Object.keys(req.body).length === 0){
             return res.status(400).json({

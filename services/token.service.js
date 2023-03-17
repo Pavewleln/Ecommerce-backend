@@ -1,12 +1,12 @@
-import jwt from 'jsonwebtoken'
 import tokenModel from "../models/token.js"
+import jwt from 'jsonwebtoken'
 
 export const generateTokens = (payload) => {
     const data = {
         _id: payload._id,
         isAdmin: payload.isAdmin
     }
-    const accessToken = jwt.sign(data, process.env.JWT_ACCESS_SECRET, { expiresIn: '15m' })
+    const accessToken = jwt.sign(data, process.env.JWT_ACCESS_SECRET, { expiresIn: '1h' })
     const refreshToken = jwt.sign(data, process.env.JWT_REFRESH_SECRET, { expiresIn: '30d' })
 
     return {
