@@ -10,7 +10,7 @@ export const getAll = async (req, res, next) => {
     }
 }
 
-export const createProduct = async (req, res, next) => {
+export const create = async (req, res, next) => {
     try {
         if(Object.keys(req.body).length === 0){
             return res.status(400).json({
@@ -19,13 +19,14 @@ export const createProduct = async (req, res, next) => {
             })
         }
 
-        const {title, description, price, photos, type} = req.body
+        const {title, description, price, photos, type, seller, kol} = req.body
 
         const newProduct = await ProductModel.create({
             title: title,
             description: description,
             price: price,
-            seller: req.user._id,
+            seller: seller,
+            kol: kol,
             $push: {
                 photos: photos
             },
@@ -34,5 +35,20 @@ export const createProduct = async (req, res, next) => {
         res.status(201).json(newProduct)
     } catch (error) {
         next(error)
+    }
+}
+
+export const getById = async (req, res, next) => {
+    try {
+        const product = await ProductModel.findById(req.params.id)
+        if(!product) {
+            return res.status(400).json({
+                message: "Продукт не найден",
+                error: "product-is-not-defined"
+            })
+        }
+        res.status(200).json(product)
+    } catch (err) {
+        next(err)
     }
 }
