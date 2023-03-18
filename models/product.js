@@ -31,6 +31,8 @@ const ProductSchema = new Schema({
         required: true
     }
 
+}, {
+    timestamps: true
 })
 
 export default model('Products', ProductSchema)

@@ -10,7 +10,7 @@ router.get('/:id', getById)
 // It will be realized in the soon future :D
 /* 
 router.patch('/update', haveAccess, update)
-router.delete('/remove', haveAccess, remove) */
+router.delete('/:id', haveAccess, remove) */
 
 
 export default router

@@ -2,6 +2,22 @@ import ProductModel from "../models/product.js";
 
 export const getAll = async (req, res, next) => {
     try {
+        // console.log(req.query)
+        // Получаем следуюшие данные
+        // По ним надо фильтровать
+        // {
+        //     sort: 'newest',
+        //     searchItem: 'Ыукс',
+        //     page: '1',
+        //     categories: [ 'apple', 'xiaomi', 'nokia' ],
+        //     fromPrice: '209203',
+        //     beforePrice: '20000'
+        // }
+        // Если fromPrice или beforePrice равны 0, то мы не берем их во внимание
+        // Если categories равен пустому массиву, то мы не берем их во внимание
+        // Если searchItem равен пустой строке, то мы не берем их во внимание
+        // sort есть всегда - по умолчанию newest
+        // page есть всегда - по умолчанию 1 - это пагинация
         const products = await ProductModel.find()
         res.status(200).json(products)
     } catch (error) {
