@@ -6,6 +6,7 @@ export const newUserData = (user) => {
         phone: user.phone,
         email: user.email,
         isAdmin: user.isAdmin,
-        isActivated: user.isActivated
+        isActivated: user.isActivated,
+        avatarUrl: user.avatarUrl
     }
 }

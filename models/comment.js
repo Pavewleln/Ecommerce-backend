@@ -15,6 +15,13 @@ const CommentSchema = new mongoose.Schema({
         required: true
     },
     avatarUrl: String,
+    rating: {
+        type: Number
+    },
+    authorId: {
+        type: String,
+        required: true
+    }
 }, {
     timestamps: true
 })

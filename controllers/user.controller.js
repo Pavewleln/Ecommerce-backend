@@ -101,24 +101,26 @@ export const refresh = async (req, res) => {
     }
 }
 
-
-// Skwize: add User edit functions
-export const edit = async (req, res) => {
-    const {name, surname, email, phone, avatarUrl} = req.body
-    const user = await UserModel.findById(req.userId)
-
-    if (!user) return res.json({message: 'Пользователь не найден'})
-
-    user.update({
-        name: name || user.name,
-        surname: surname || user.surname,
-        email: email || user.email,
-        phone: phone || user.phone,
-        avatarUrl: avatarUrl || user.avatarUrl
-    }).save()
-
-    res.status(200).json({
-        message: "Данные обновлены"
-    })
+export const edit = async (req, res, next) => {
+    try {
+        const {name, surname, email, phone, avatarUrl, id} = req.body
+        const user = await UserModel.findOneAndUpdate(id, {
+            name: name || user.name,
+            surname: surname || user.surname,
+            email: email || user.email,
+            phone: phone || user.phone,
+            avatarUrl: avatarUrl || user.avatarUrl
+        }, {
+            returnDocument: 'after'
+        })
+    
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+        res.status(404).json({
+            message: "Ошибка",
+            error: error
+        })
+    }    
 }
 
