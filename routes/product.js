@@ -5,7 +5,7 @@ import {getAll, create, getById} from './../controllers/product.controller.js'
 const router = express.Router()
 
 router.get('/', getAll)
-router.post('/create', create)
+router.post('/', create)
 router.get('/:id', getById)
 // It will be realized in the soon future :D
 /* 

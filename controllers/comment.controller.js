@@ -1,12 +1,13 @@
 import CommentModel from '../models/comment.js'
 
 export const create = async (req, res, next) => {
+    const {author, text, avatarUrl, product} = req.body
     try{
         const doc = new CommentModel({
-            author: req.body.author,
-            text: req.body.text,
-            avatarUrl: req.body.avatarUrl,
-            product: req.body.product
+            author,
+            text,
+            avatarUrl,
+            product
         })
         const comment = await doc.save()
         res.json(comment)

@@ -28,27 +28,20 @@ export const getAll = async (req, res, next) => {
 
 export const create = async (req, res, next) => {
     try {
-        if(Object.keys(req.body).length === 0){
-            return res.status(400).json({
-                message: "Не корректный запрос",
-                error: "Bad Request"
-            })
-        }
+        const {title, description, price, kol, seller, images, type} = req.body
 
-        const {title, description, price, photos, type, seller, kol} = req.body
-
-        const newProduct = await ProductModel.create({
-            title: title,
-            description: description,
-            price: price,
-            seller: seller,
-            kol: kol,
-            $push: {
-                photos: photos
-            },
-            type: type,
+        const product = new ProductModel({
+            title: title.toLowerCase(), 
+            description, 
+            price, 
+            kol, 
+            seller, 
+            images, 
+            type
         })
-        res.status(201).json(newProduct)
+        await product.save()
+        res.json(product)
+
     } catch (error) {
         next(error)
     }

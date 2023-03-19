@@ -23,14 +23,14 @@ const ProductSchema = new Schema({
         ref: 'Users',
         required: true,
     },
-    photos: [{
-        type: String
-    }],
+    images: {
+        type: Array,
+        required: true
+    },
     type: {
         type: String,
         required: true
     }
-
 }, {
     timestamps: true
 })

@@ -4,7 +4,7 @@ import { create, getAll } from '../controllers/comment.controller.js'
 const router = express.Router()
 
 router.get('/:id', getAll)
-router.post('/create', create)
+router.post('/', create)
 // It will be realized in the soon future :D
 /* 
 router.patch('/update', haveAccess, update)
