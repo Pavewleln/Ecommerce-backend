@@ -7,6 +7,8 @@ export const newUserData = (user) => {
         email: user.email,
         isAdmin: user.isAdmin,
         isActivated: user.isActivated,
-        avatarUrl: user.avatarUrl
+        avatarUrl: user.avatarUrl,
+        favourites: user.favourites,
+        activationLink: user.activationLink
     }
 }

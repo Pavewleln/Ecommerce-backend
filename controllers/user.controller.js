@@ -104,17 +104,21 @@ export const refresh = async (req, res) => {
 export const edit = async (req, res, next) => {
     try {
         const {name, surname, email, phone, avatarUrl, id} = req.body
-        const user = await UserModel.findOneAndUpdate(id, {
-            name: name || user.name,
-            surname: surname || user.surname,
-            email: email || user.email,
-            phone: phone || user.phone,
-            avatarUrl: avatarUrl || user.avatarUrl
+        const userData = await UserModel.findOneAndUpdate(id, {
+            name,
+            surname,
+            email,
+            phone,
+            avatarUrl
         }, {
             returnDocument: 'after'
         })
-    
-        res.status(200).json(user)
+        const userDataResponse = await refreshService(userData)
+        res.cookie('refreshToken', userData.refreshToken, {
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            httpOnly: true
+        })
+        res.status(200).json(userDataResponse)
     } catch (error) {
         console.log(error)
         res.status(404).json({
