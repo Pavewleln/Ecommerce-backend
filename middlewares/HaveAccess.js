@@ -1,10 +1,10 @@
-import ProductModel from "../models/product.js"
+import ProductModel from "../models/Product.js"
 
 // Получаем ID продавца товара
-async function getProductSeller (product) {
+async function getProductSeller(product) {
     if (!product) return null
     try {
-        const productSeller = await ProductModel.findById(product, {seller: true})
+        const productSeller = await ProductModel.findById(product, { seller: true })
         return productSeller
     } catch (error) {
         console.log(error)

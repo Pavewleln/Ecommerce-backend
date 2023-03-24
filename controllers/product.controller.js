@@ -1,8 +1,8 @@
-import ProductModel from "../models/product.js";
+import ProductModel from "../models/Product.js";
 
 export const getAll = async (req, res, next) => {
     try {
-        const {sort, searchItem, page, categories, fromPrice, beforePrice} = req.query
+        const { sort, searchItem, page, categories, fromPrice, beforePrice } = req.query
         // console.log(req.query)
         // console.log(req.query)
         // Получаем следуюшие данные
@@ -23,28 +23,28 @@ export const getAll = async (req, res, next) => {
         let products = []
         switch (sort) {
             case 'high-price':
-                products = await ProductModel.find().sort({price:1})
+                products = await ProductModel.find().sort({ price: 1 })
                 break
             case 'low-price':
-                products = await ProductModel.find().sort({price:-1})
+                products = await ProductModel.find().sort({ price: -1 })
                 break
             case 'newest':
-                products = await ProductModel.find().sort({createAt:-1})
+                products = await ProductModel.find().sort({ createAt: -1 })
                 break
             case 'oldest':
-                products = await ProductModel.find().sort({createAt:1})
+                products = await ProductModel.find().sort({ createAt: 1 })
                 break;
         }
-        if(categories && categories.length) {
+        if (categories && categories.length) {
             products = products.filter(product => categories.includes(product.type.toLowerCase()));
         }
-        if(searchItem.length > 3) {
+        if (searchItem.length > 3) {
             products = products.filter(product => product.title.toLowerCase().includes(searchItem.toLowerCase()))
         }
-        if(+fromPrice < +beforePrice || (+fromPrice > +beforePrice && +beforePrice === 0)) {
+        if (+fromPrice < +beforePrice || (+fromPrice > +beforePrice && +beforePrice === 0)) {
             products = products.filter(product => +product.price >= +fromPrice)
         }
-        if(+fromPrice < +beforePrice || +beforePrice > 0) {
+        if (+fromPrice < +beforePrice || +beforePrice > 0) {
             products = products.filter(product => +product.price <= +beforePrice)
         }
 
@@ -57,15 +57,15 @@ export const getAll = async (req, res, next) => {
 
 export const create = async (req, res, next) => {
     try {
-        const {title, description, price, kol, images, type} = req.body
+        const { title, description, price, kol, images, type } = req.body
 
         const product = new ProductModel({
-            title: title.toLowerCase(), 
-            description, 
-            price, 
-            kol, 
-            seller: req.userId, 
-            images, 
+            title: title.toLowerCase(),
+            description,
+            price,
+            kol,
+            seller: req.userId,
+            images,
             type
         })
         await product.save()
@@ -79,7 +79,7 @@ export const create = async (req, res, next) => {
 export const getById = async (req, res, next) => {
     try {
         const product = await ProductModel.findById(req.params.id)
-        if(!product) {
+        if (!product) {
             return res.status(400).json({
                 message: "Продукт не найден",
                 error: "product-is-not-defined"
@@ -100,7 +100,7 @@ export const remove = async (req, res, next) => {
                 return res.status(500).json({
                     message: "Не удалось удалить товар"
                 })
-            } 
+            }
             if (!doc) {
                 return res.status(404).json({
                     message: "Товар не найден"
@@ -116,7 +116,7 @@ export const remove = async (req, res, next) => {
 }
 export const myProducts = async (req, res, next) => {
     try {
-        const products = await ProductModel.find({seller: req.userId})
+        const products = await ProductModel.find({ seller: req.userId })
         res.json(products)
     } catch (err) {
         next(err)

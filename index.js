@@ -4,7 +4,6 @@ import cors from 'cors'
 import multer from 'multer'
 import express from 'express'
 import mongoose from 'mongoose'
-import isAuth from './utils/isAuth.js'
 import cookieParser from 'cookie-parser'
 
 // Routes import
