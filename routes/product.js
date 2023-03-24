@@ -1,15 +1,13 @@
 import express from 'express'
 import isAuth from '../utils/isAuth.js'
-import {getAll, createProduct} from './../controllers/product.controller.js'
+import {getAll, create, getById, myProducts, remove} from './../controllers/product.controller.js'
 
 const router = express.Router()
 
 router.get('/', getAll)
-router.post('/create', isAuth, createProduct)
-// It will be realized in the soon future :D
-/* 
-router.patch('/update', haveAccess, update)
-router.delete('/remove', haveAccess, remove) */
-
+router.post('/', isAuth, create)
+router.get('/:id', getById)
+router.get('/all/my', isAuth, myProducts)
+router.delete('/:id', isAuth, remove)
 
 export default router

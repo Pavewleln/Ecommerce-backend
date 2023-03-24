@@ -1,15 +1,16 @@
 import dotenv from 'dotenv'
 dotenv.config()
-import express from 'express'
 import cors from 'cors'
+import multer from 'multer'
+import express from 'express'
 import mongoose from 'mongoose'
 import isAuth from './utils/isAuth.js'
-import multer from 'multer'
 import cookieParser from 'cookie-parser'
 
 // Routes import
 import AuthRoute from './routes/auth.js'
 import ProductRoute from './routes/product.js'
+import CommentRoute from './routes/comment.js'
 
 
 const app = express()
@@ -30,16 +31,17 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage})
-
-app.use('/auth', AuthRoute)
-app.use('/products', ProductRoute)
-
-
-app.post('/upload', upload.single('avatarUrl'), (req, res) => {
+app.post('/upload', upload.single('images'), (req, res) => {
     res.json({
         url: `uploads/${req.file.originalname}`
     })
 })
+
+app.use('/auth', AuthRoute)
+app.use('/products', ProductRoute)
+app.use('/comments', CommentRoute)
+
+
 
 mongoose
     .connect(process.env.MONGO_DB_URL)
