@@ -57,14 +57,14 @@ export const getAll = async (req, res, next) => {
 
 export const create = async (req, res, next) => {
     try {
-        const {title, description, price, kol, seller, images, type} = req.body
+        const {title, description, price, kol, images, type} = req.body
 
         const product = new ProductModel({
             title: title.toLowerCase(), 
             description, 
             price, 
             kol, 
-            seller, 
+            seller: req.userId, 
             images, 
             type
         })
@@ -86,6 +86,38 @@ export const getById = async (req, res, next) => {
             })
         }
         res.status(200).json(product)
+    } catch (err) {
+        next(err)
+    }
+}
+export const remove = async (req, res, next) => {
+    try {
+        ProductModel.findByIdAndDelete({
+            _id: req.params.id
+        }, (err, doc) => {
+            if (err) {
+                console.log(err)
+                return res.status(500).json({
+                    message: "Не удалось удалить товар"
+                })
+            } 
+            if (!doc) {
+                return res.status(404).json({
+                    message: "Товар не найден"
+                })
+            }
+            res.json({
+                success: true
+            })
+        })
+    } catch (err) {
+        next(err)
+    }
+}
+export const myProducts = async (req, res, next) => {
+    try {
+        const products = await ProductModel.find({seller: req.userId})
+        res.json(products)
     } catch (err) {
         next(err)
     }

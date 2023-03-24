@@ -31,17 +31,17 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage})
+app.post('/upload', upload.single('images'), (req, res) => {
+    res.json({
+        url: `uploads/${req.file.originalname}`
+    })
+})
 
 app.use('/auth', AuthRoute)
 app.use('/products', ProductRoute)
 app.use('/comments', CommentRoute)
 
 
-app.post('/upload', upload.single('avatarUrl'), (req, res) => {
-    res.json({
-        url: `uploads/${req.file.originalname}`
-    })
-})
 
 mongoose
     .connect(process.env.MONGO_DB_URL)
