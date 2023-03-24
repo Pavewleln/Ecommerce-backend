@@ -1,5 +1,5 @@
 import express from 'express'
-import { create, getAll, remove } from '../controllers/comment.controller.js'
+import { create, getAll, remove } from '../controllers/comment_controller.js'
 import isAuth from '../utils/isAuth.js'
 
 const router = express.Router()

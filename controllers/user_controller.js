@@ -1,5 +1,5 @@
 import { registerService, loginService, logoutService, refreshService } from '../services/user.service.js'
-import UserModel from '../models/User.js'
+import UserModel from '../models/user.js'
 import bcrypt from 'bcrypt'
 import { findToken, validationRefreshToken } from '../services/token.service.js'
 

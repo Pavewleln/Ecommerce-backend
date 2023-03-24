@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import UserModel from '../models/User.js'
+import UserModel from '../models/user.js'
 import { newUserData } from '../utils/userData.js'
 import { generateTokens, removeToken, saveToken } from "./token.service.js"
 

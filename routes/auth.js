@@ -1,5 +1,5 @@
 import express from 'express'
-import { registration, login, refresh, logout, edit } from './../controllers/user.controller.js'
+import { registration, login, refresh, logout, edit } from '../controllers/user_controller.js'
 import { registerValidator, loginValidator } from '../validations.js'
 import handleErrors from './../utils/handleErrors.js'
 import isAuth from '../utils/isAuth.js'

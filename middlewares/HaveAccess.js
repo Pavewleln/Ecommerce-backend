@@ -1,4 +1,4 @@
-import ProductModel from "../models/Product.js"
+import ProductModel from "../models/product.js"
 
 // Получаем ID продавца товара
 async function getProductSeller(product) {

@@ -1,6 +1,6 @@
 import express from 'express'
 import isAuth from '../utils/isAuth.js'
-import {getAll, create, getById, myProducts, remove} from './../controllers/product.controller.js'
+import {getAll, create, getById, myProducts, remove} from '../controllers/product_controller.js'
 
 const router = express.Router()
 
