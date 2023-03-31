@@ -1,14 +1,14 @@
 import CommentModel from '../models/comment.js'
 
 export const create = async (req, res, next) => {
-    const {text, avatarUrl, product, rating} = req.body
+    const {text, avatarUrl, product, rating, author} = req.body
     try{
         const doc = new CommentModel({
-            author: req.userId,
+            author,
             text,
             avatarUrl,
             product,
-            rating: rating || 0,
+            rating: rating,
             authorId: req.userId
         })
         const comment = await doc.save()

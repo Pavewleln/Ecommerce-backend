@@ -59,7 +59,7 @@ export const create = async (req, res, next) => {
     try {
         const { title, description, price, kol, images, type } = req.body
 
-        const product = new ProductModel({
+        const product = await new ProductModel({
             title: title.toLowerCase(),
             description,
             price,
@@ -71,6 +71,28 @@ export const create = async (req, res, next) => {
         await product.save()
         res.json(product)
 
+    } catch (error) {
+        next(error)
+    }
+}
+export const update = async (req, res, next) => {
+    try {
+        const productId = req.params.id
+        const { title, description, price, kol, images, type } = req.body
+
+        await ProductModel.updateOne({
+            _id: productId
+        }, {
+            title: title.toLowerCase(),
+            description,
+            price,
+            kol,
+            images,
+            type
+        })
+        res.json({
+            success: true 
+        })
     } catch (error) {
         next(error)
     }
